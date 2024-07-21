@@ -1,18 +1,29 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainRoutes from '../src/Routes/MainRoutes';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navbar } from "./components/navbar";
+import { Homepage } from "../src/UI Component/shop/Homepage";
+import { Cart } from "./UI Component/cart/Cart";
+import { ShopContextProvider } from "./Context/ShopContext";
+import { SignIn } from "./UI Component/SignIn";
+import { SignUp } from "./UI Component/SignUp";
+import { Checkout } from "./UI Component/checkout/Checkout";  
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
+    <div className="App">
+    <ShopContextProvider>
+      <Router>
+        <Navbar />
         <Routes>
-            {MainRoutes.map((route, index) => (
-              <Route key={index} path={route.path} element={<route.component/>}/>
-            ))}
+          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </Router>
+    </ShopContextProvider>
+  </div>
   );
 }
 
